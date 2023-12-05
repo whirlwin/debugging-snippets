@@ -16,8 +16,6 @@ Show open TCP connections with source and destination addresses and ports.
 ℹ️️ Replace `tcp` with `tcp6` at the end to show IPv6 connections.
 
 ```shell
-
-```shell
 awk 'function hextodec(str,ret,n,i,k,c){
     ret = 0
     n = length(str)
