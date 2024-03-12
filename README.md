@@ -1,8 +1,10 @@
+
 debugging-snippets
 -------------------
 
 - [Network](#network)
 - [Processes](#processes)
+- [Java](#java)
 
 Useful debugging snippets for everyday operations. ⚙️
 
@@ -61,3 +63,12 @@ Find the ports belonging to a PID.
 sudo netstat -ltnup | grep 'LISTEN' | grep '123/'
 ```
 
+<a id="java"></a>
+# 3. Java
+
+## Inspecting class JVM bytecode
+Find the minimum required JRE required to run the bytecode. E.g. 51 means Java 1.7.
+ℹ️ Replace the jar and class references accordingly.
+```shell
+javap -v -classpath myjar.jar com.example.Main | grep major
+```
