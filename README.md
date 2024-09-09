@@ -43,6 +43,12 @@ NR > 1 {{if(NR==2)print "Local - Remote";local=getIP($2);remote=getIP($3)}{print
 Show the HTTP path of a request on a port.
 ℹ️ Replace the port number accordingly.
 ```shell
+ngrep -W byline 'POST' port 8080
+```
+
+Or...
+
+```shell
 sudo tcpdump -s 0 -v -n -l port 8080 | egrep -i "POST /|GET /|HEAD /|PUT /|DELETE /|CONNECT /|OPTIONS /|TRACE /|PATH /"
 ```
 
