@@ -39,7 +39,7 @@ function getIP(str,ret){
 NR > 1 {{if(NR==2)print "Local - Remote";local=getIP($2);remote=getIP($3)}{print local" - "remote}}' /proc/net/tcp
 ```
 
-# Show all HTTP requests on a port
+## Show all HTTP requests on a port
 Show the HTTP path of a request on a port.
 ℹ️ Replace the port number accordingly.
 ```shell
@@ -50,6 +50,22 @@ Or...
 
 ```shell
 sudo tcpdump -s 0 -v -n -l port 8080 | egrep -i "POST /|GET /|HEAD /|PUT /|DELETE /|CONNECT /|OPTIONS /|TRACE /|PATH /"
+```
+
+## Find false positives in AWS WAF
+
+```shell
+# Download all WAF logs for a given time period
+aws s3 cp s3://<WAF_LOGS_LOCATION>/AWSLogs/<ACCOUNT_ID>/WAFLogs/<REGION>/<WAF_ACL_NAME>/<DATE> . --recursive
+
+# Uncompress all files
+gunzip ./**/*.gz
+
+# Select all BLOCKED requests
+cat ./**/*.log | jq -c '. | select(."action" == "BLOCK")' | jq '.'
+
+# Show occurences of BLOCKED requests by path
+cat ./**/*.log | jq -c '. | select(."action" == "BLOCK")' | jq '.httpRequest.uri' | sort | uniq -c
 ```
 
 <a id="processes"></a>
