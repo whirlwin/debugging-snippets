@@ -94,3 +94,9 @@ Find the minimum required JRE required to run the bytecode. E.g. 51 means Java 1
 ```shell
 javap -v -classpath myjar.jar com.example.Main | grep major
 ```
+
+## Thread dump without JDK, jstack, etc.
+Dump the threads using a statically linked binary, (jattach)[https://github.com/jattach/jattach]:
+```shell
+./jattach 1 threaddump
+```
